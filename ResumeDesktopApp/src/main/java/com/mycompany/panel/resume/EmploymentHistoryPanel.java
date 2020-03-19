@@ -33,7 +33,6 @@ public class EmploymentHistoryPanel extends javax.swing.JPanel {
     
     private void fillTable(){
         list=emHistoryDao.getAllImploymentHistoryUserId(Config.loggedInUser.getId());
-        System.out.println(list.size());
         Vector<Vector> rows=new Vector();
         for (EmploymentHistory em : list) {
             Vector<Object> row=new Vector();
@@ -42,7 +41,6 @@ public class EmploymentHistoryPanel extends javax.swing.JPanel {
             row.add(em.getEndDate());
             row.add(em.getJobDescription());
             rows.add(row);
-            System.out.println("Movsum");
         }
         Vector<String> columns=new Vector<>();
         columns.add("Header");

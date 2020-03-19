@@ -46,7 +46,6 @@ public class EmploymentHistoryDaoImpl extends AbstractDao implements EmploymentH
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        System.out.println(result.size());
         return result;
     }
 

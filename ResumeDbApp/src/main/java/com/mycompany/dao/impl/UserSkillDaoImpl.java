@@ -43,8 +43,8 @@ public class UserSkillDaoImpl extends AbstractDao implements UserSkillDaoInter {
                     + "	user_skill us"
                     + "	LEFT JOIN USER u ON u.id = us.user_id"
                     + "	LEFT JOIN skill s ON s.id = us.skill_id"
-                    + "WHERE" 
-                    + "us.user_id =? ");
+                    + " WHERE" 
+                    + " us.user_id =? ");
             stmt.setInt(1, userId);
             stmt.execute();
             ResultSet rs = stmt.getResultSet();
