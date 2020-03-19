@@ -122,15 +122,17 @@ public class UserDaoImpl extends AbstractDao implements UserDaoInter {
     public boolean addUser(User u) {
         try(Connection c=connect()){
             PreparedStatement stmt=c.prepareStatement("insert into user(name,surname,email,phone,"
-                    + "address,profile_description,birthdate,birthplace_id,nationality_id) values(?,?,?,?,?,?,?,?,?)");
+                    + "address,profile_description,birthdate,birthplace_id,nationality_id)"
+                    + " values(?,?,?,?,?,?,?,?,?)");
             stmt.setString(1, u.getName());
             stmt.setString(2, u.getSurname());
             stmt.setString(3, u.getEmail());
             stmt.setString(4, u.getPhone());
-            stmt.setString(5, u.getProfileDescription());
-            stmt.setDate(6, u.getBirthdate());
-            stmt.setInt(7, u.getBirthplace().getId());
-            stmt.setInt(8, u.getNationality().getId());
+            stmt.setString(5, u.getAddress());
+            stmt.setString(6, u.getProfileDescription());
+            stmt.setDate(7, u.getBirthdate());
+            stmt.setInt(8, u.getBirthplace().getId());
+            stmt.setInt(9, u.getNationality().getId());
             return stmt.execute();
         }catch(Exception ex){
             ex.printStackTrace();

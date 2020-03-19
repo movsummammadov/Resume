@@ -38,6 +38,7 @@ public class Main extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jFileChooser1 = new javax.swing.JFileChooser();
         pnlUserInfo = new javax.swing.JPanel();
         txtName = new javax.swing.JTextField();
         txtSurname = new javax.swing.JTextField();
@@ -46,10 +47,10 @@ public class Main extends javax.swing.JFrame {
         lblName = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         tpUserInfo = new javax.swing.JTabbedPane();
-        pnlProfile = new com.mycompany.panel.resume.ProfilePanel();
         pnlDetails = new com.mycompany.panel.resume.DetailsPanel();
         pnlSkills = new com.mycompany.panel.resume.SkillsPanel();
         pnlEmploymentHistory = new com.mycompany.panel.resume.EmploymentHistoryPanel();
+        pnlProfile = new com.mycompany.panel.resume.ProfilePanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -100,10 +101,10 @@ public class Main extends javax.swing.JFrame {
                 .addGap(447, 447, 447))
         );
 
-        tpUserInfo.addTab("Profile", pnlProfile);
         tpUserInfo.addTab("Details", pnlDetails);
         tpUserInfo.addTab("Skills", pnlSkills);
         tpUserInfo.addTab("Employment History", pnlEmploymentHistory);
+        tpUserInfo.addTab("Profile", pnlProfile);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -111,16 +112,17 @@ public class Main extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(pnlUserInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jSeparator1)
-            .addComponent(tpUserInfo)
+            .addComponent(tpUserInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 617, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(pnlUserInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(pnlUserInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tpUserInfo))
+                .addComponent(tpUserInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -153,6 +155,7 @@ public class Main extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSave;
+    private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblSurname;
