@@ -1,6 +1,8 @@
 package com.mycompany.resumewebapp;
 
+import com.mycompany.dao.inter.SkillDaoInter;
 import com.mycompany.dao.inter.UserDaoInter;
+import com.mycompany.entity.Skill;
 import com.mycompany.entity.User;
 import com.mycompany.main.Context;
 import java.io.BufferedReader;
@@ -25,19 +27,31 @@ import javax.servlet.http.HttpServletResponse;
 
 public class MyFavoritePages extends HttpServlet {
 
-    private UserDaoInter userDao = Context.instanceUSerDao();
+//    private UserDaoInter userDao = Context.instanceUSerDao();
+    private SkillDaoInter skillDao = Context.instanceSkillDao();
+    private int a = 0;
+
+    @Override
+    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("service");
+        super.service(req, resp);
+    }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            String requestStr=getAllDataFromRequest(request);
-            System.out.println("requestStr="+requestStr);
-            String name = String.valueOf(request.getAttribute("name"));
-            String surname = (request.getParameter("surname"));
-            User u = new User(0, name, surname, null, null, null, null, null, null, null);
-            boolean d = userDao.addUser(u);
-            System.out.println(u);
-//        List<User> users=userDao.getAllUser();
+//
+//            String name = String.valueOf(request.getParameter("name"));
+//            skillDao.addSkill(new Skill(0, name));
+//            String surname = String.valueOf(request.getParameter("surname"));
+//            String phone = String.valueOf(request.getParameter("phone"));
+//            String email = String.valueOf(request.getParameter("email"));
+//            String prof = String.valueOf(request.getParameter("prof"));
+//            User u = new User(0, name, surname, email, phone, null, prof, null, null, null);
+//            boolean d = userDao.addUser(u);
+//            System.out.println(userDao.getAllUser());
+            a++;
+            System.out.println("Get");
             response.setContentType("text/html;charset=UTF-8");
             try (PrintWriter out = response.getWriter()) {
                 out.println("<!DOCTYPE html>");
@@ -46,9 +60,9 @@ public class MyFavoritePages extends HttpServlet {
                 out.println("<title>Servlet MyFavoritePages</title>");
                 out.println("</head>");
                 out.println("<body>");
-                out.println("inserted" + u.getId());
+                out.println("a=" + a);
 //            for (User user : users) {
-//                out.println(user);
+                out.println(skillDao.getAllSkill());
 //            }
                 //out.println("<h1>Servlet MyFavoritePages at " + request.getContextPath() + "</h1>");
                 out.println("</body>");
