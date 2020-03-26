@@ -1,0 +1,35 @@
+<%-- 
+    Document   : user
+    Created on : Mar 26, 2020, 1:13:15 PM
+    Author     : movsu
+--%>
+
+<%@page import="com.mycompany.entity.User"%>
+<%@page import="com.mycompany.main.Context"%>
+<%@page import="com.mycompany.dao.inter.UserDaoInter"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+    </head>
+    <body>
+        <%
+            UserDaoInter userDao = Context.instanceUSerDao();
+            User u = userDao.getById(1);
+        %>
+        <form action="UserController" method="POST">
+            <div>
+                <input type="hidden" name="id" value="<%=u.getId()%>" />
+                <label for="name">Name:</label>
+                <input type="text" name="name" value="<%=u.getName()%>" />
+                <br>
+                <label for="name">Surname:</label>
+                <input type="text" name="surname" value="<%=u.getSurname()%>" />
+                <input type="submit" name="save" value="Save" />
+            </div>
+        </form>
+
+    </body>
+</html>
