@@ -28,11 +28,11 @@ public class UserController extends HttpServlet {
         String name=request.getParameter("name");
         String surname=request.getParameter("surname");
         
-        User users=userDao.getById(id);
-        users.setName(name);
-        users.setSurname(surname);
+        User user=userDao.getById(id);
+        user.setName(name);
+        user.setSurname(surname);
              
-        userDao.updateUser(users);
+        userDao.updateUser(user);
         
         response.sendRedirect("user.jsp");
     }

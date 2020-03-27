@@ -17,6 +17,18 @@
     <body>
         <%
             UserDaoInter userDao = Context.instanceUSerDao();
+//            if(request.getParameter("save")!=null && request.getParameter("save").equals("Save")){
+//            int id = Integer.valueOf(request.getParameter("id"));
+//            String name = request.getParameter("name");
+//            String surname = request.getParameter("surname");
+//
+//            User user = userDao.getById(id);
+//            user.setName(name);
+//            user.setSurname(surname);
+//
+//            userDao.updateUser(user);
+//            response.sendRedirect("user.jsp");
+//            }
             User u = userDao.getById(1);
         %>
         <form action="UserController" method="POST">
