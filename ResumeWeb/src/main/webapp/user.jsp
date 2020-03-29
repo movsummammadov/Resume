@@ -35,11 +35,13 @@
 %>
 <form action="UserController" method="POST">
     <div>
+        <%--@declare id="surname"--%>
+        <%--@declare id="name"--%>
         <input type="hidden" name="id" value="<%=u.getId()%>" />
         <label for="name">Name:</label>
         <input type="text" name="name" value="<%=u.getName()%>" />
         <br>
-        <label for="name">Surname:</label>
+        <label for="surname">Surname:</label>
         <input type="text" name="surname" value="<%=u.getSurname()%>" />
         <input type="submit" name="save" value="Save" />
     </div>

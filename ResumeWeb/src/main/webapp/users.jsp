@@ -24,13 +24,35 @@
 %>
 <form action="UserController" method="POST">
     <div>
+        <%--@declare id="surname"--%>
+        <%--@declare id="name"--%>
         <input type="hidden" name="id" value="" />
         <label for="name">Name:</label>
         <input type="text" name="name" value="" />
         <br>
-        <label for="name">Surname:</label>
+        <label for="surname">Surname:</label>
         <input type="text" name="surname" value="" />
         <input type="submit" name="search" value="Search" />
+    </div>
+    <div>
+        <table border="2">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Nationality</th>
+            </tr>
+            </thead>
+            <tbody>
+            <%for(User u:list){%>
+            <tr>
+                <td><%=u.getName()%></td>
+                <td><%=u.getSurname()%></td>
+                <td><%=u.getNationality().getName()==null?"N/A":u.getNationality().getName()%></td>
+            </tr>
+            <%}%>
+            </tbody>
+        </table>
     </div>
 </form>
 

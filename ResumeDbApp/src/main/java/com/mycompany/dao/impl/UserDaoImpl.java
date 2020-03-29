@@ -62,6 +62,50 @@ public class UserDaoImpl extends AbstractDao implements UserDaoInter {
         }
         return result;
     }
+    @Override
+    public List<User> getAllUser(String name,String surname,Integer nationalityId) {
+        List<User> result = new ArrayList<>();
+        try (Connection c = connect()) {
+            String sql="SELECT"
+                    + "	u.*,"
+                    + "	c.name birthplace,"
+                    + "	n.nationality "
+                    + " FROM USER u"
+                    + "	LEFT JOIN country c ON u.birthplace_id = c.id"
+                    + "	LEFT JOIN country n ON u.nationality_id = n.id where 1+1 ";
+            if(name!=null){
+                sql+="and name=? ";
+            }
+            if(surname!=null){
+                sql+="and surname=? ";
+            }
+            if(nationalityId!=null){
+                sql+="and nationality_id=? ";
+            }
+            PreparedStatement stmt = c.prepareStatement(sql);
+            int i=1;
+            if(name!=null){
+                stmt.setString(i,name);
+                i++;
+            }
+            if(surname!=null){
+                stmt.setString(i,surname);
+                i++;
+            }
+            if(nationalityId!=null){
+                stmt.setInt(i,nationalityId);
+
+            }
+            stmt.execute();
+            ResultSet rs = stmt.getResultSet();
+            while (rs.next()) {
+                result.add(getUser(rs));
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return result;
+    }
 
     @Override
     public User getById(int userId) {
