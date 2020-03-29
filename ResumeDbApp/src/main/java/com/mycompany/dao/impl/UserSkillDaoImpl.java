@@ -38,7 +38,7 @@ public class UserSkillDaoImpl extends AbstractDao implements UserSkillDaoInter {
                     + "	u.*,"
                     + "	s.name skill_name,"
                     + "	us.power,"
-                    + "us.id user_skill_id"
+                    + " us.id user_skill_id"
                     + " FROM"
                     + "	user_skill us"
                     + "	LEFT JOIN USER u ON u.id = us.user_id"
