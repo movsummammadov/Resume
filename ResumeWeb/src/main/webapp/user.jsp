@@ -37,13 +37,20 @@
     <div>
         <%--@declare id="surname"--%>
         <%--@declare id="name"--%>
-        <input type="hidden" name="id" value="<%=u.getId()%>" />
-        <label for="name">Name:</label>
-        <input type="text" name="name" value="<%=u.getName()%>" />
-        <br>
-        <label for="surname">Surname:</label>
-        <input type="text" name="surname" value="<%=u.getSurname()%>" />
-        <input type="submit" name="save" value="Save" />
+            <input type="hidden" name="id" value="<%=u.getId()%>" />
+            <label for="name">Name:</label>
+            <input type="text" name="name" value="<%=u.getName()%>" />
+            <br>
+            <label for="surname">Surname:</label>
+            <input type="text" name="surname" value="<%=u.getSurname()%>" />
+            <hr>
+            <br>
+            <label for="surname">Email:</label>
+            <input type="email" name="email" value="<%=u.getEmail()%>" />
+            <br>
+            <label for="surname">Address:</label>
+            <input type="text" name="address" value="<%=u.getAddress()%>" />
+            <input type="submit" name="save" value="Save" />
     </div>
 </form>
 

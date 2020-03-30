@@ -27,10 +27,14 @@ public class UserController extends HttpServlet {
         int id=Integer.valueOf(request.getParameter("id"));
         String name=request.getParameter("name");
         String surname=request.getParameter("surname");
+        String email=request.getParameter("email");
+        String address=request.getParameter("address");
 
         User user=userDao.getById(id);
         user.setName(name);
         user.setSurname(surname);
+        user.setEmail(email);
+        user.setAddress(address);
 
         userDao.updateUser(user);
 

@@ -20,39 +20,55 @@
 <body>
 <%
     UserDaoInter userDao = Context.instanceUSerDao();
-    List<User> list = userDao.getAllUser();
+    String name=request.getParameter("name");
+    String surname=request.getParameter("surname");
+    String nationalityIdStr=request.getParameter("nId");
+    Integer nationaltyId=null;
+    if(nationalityIdStr!=null && !nationalityIdStr.trim().isEmpty()){
+    nationaltyId=Integer.parseInt(request.getParameter(nationalityIdStr));}
+    List<User> list = userDao.getAllUser(name,surname,nationaltyId);
+
 %>
-<form action="UserController" method="POST">
-    <div>
-        <%--@declare id="surname"--%>
-        <%--@declare id="name"--%>
-        <input type="hidden" name="id" value="" />
-        <label for="name">Name:</label>
-        <input type="text" name="name" value="" />
-        <br>
-        <label for="surname">Surname:</label>
-        <input type="text" name="surname" value="" />
-        <input type="submit" name="search" value="Search" />
-    </div>
-    <div>
-        <table border="2">
-            <thead>
-            <tr>
-                <th>Name</th>
-                <th>Surname</th>
-                <th>Nationality</th>
-            </tr>
-            </thead>
-            <tbody>
-            <%for(User u:list){%>
-            <tr>
-                <td><%=u.getName()%></td>
-                <td><%=u.getSurname()%></td>
-                <td><%=u.getNationality().getName()==null?"N/A":u.getNationality().getName()%></td>
-            </tr>
-            <%}%>
-            </tbody>
-        </table>
+<form action="users.jsp" method="GET">
+    <div style="margin:0 auto;width: 50%">
+        <div>
+            <%--@declare id="surname"--%><%--@declare id="name"--%><%--@declare id="nationality"--%>
+                <label for="name">Name:</label>
+                <input type="text" name="name" value="" />
+                <br>
+                <label for="surname">Surname:</label>
+                <input type="text" name="surname" value="" />
+                <br>
+                <label for="nationality">Nationality:</label>
+                <input type="text" name="nationality" value="" />
+
+                <input type="submit" name="search" value="Search" />
+        </div>
+        <div>
+            <table border="2">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Surname</th>
+                    <th>Nationality</th>
+                    <th>Operation</th>
+                </tr>
+                </thead>
+                <tbody>
+                <%for(User u:list){%>
+                <tr>
+                    <td><%=u.getName()%></td>
+                    <td><%=u.getSurname()%></td>
+                    <td><%=u.getNationality().getName()==null?"N/A":u.getNationality().getName()%></td>
+                    <td>
+                        <input type="submit" name="action" value="Delete"/>
+                        <input type="submit" name="action" value="Update"/>
+                    </td>
+                </tr>
+                <%}%>
+                </tbody>
+            </table>
+        </div>
     </div>
 </form>
 
