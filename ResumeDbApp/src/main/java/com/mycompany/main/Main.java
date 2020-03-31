@@ -1,7 +1,10 @@
 package com.mycompany.main;
 
 import com.mycompany.dao.inter.EmploymentHistoryDaoInter;
+import com.mycompany.dao.inter.SkillDaoInter;
 import com.mycompany.entity.EmploymentHistory;
+import com.mycompany.entity.Skill;
+
 import java.util.List;
 
 /**
@@ -14,8 +17,8 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) throws Exception {
-        EmploymentHistoryDaoInter userSkill=Context.instanceEmploymentHistoryDao();
-        List<EmploymentHistory> list=userSkill.getAllImploymentHistoryUserId(1);
+        SkillDaoInter userSkill=Context.instanceSkillDao();
+        List<Skill> list=userSkill.getAllSkill();
         System.out.println(list);
     }
 }

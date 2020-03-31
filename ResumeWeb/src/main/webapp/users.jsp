@@ -15,6 +15,8 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="assets/css/users.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
     <title>Search Page</title>
 </head>
 <body>
@@ -30,8 +32,8 @@
 
 %>
 <form action="users.jsp" method="GET">
-    <div style="margin:0 auto;width: 50%">
-        <div>
+    <div class="container">
+        <div class="control_panel">
             <%--@declare id="surname"--%><%--@declare id="name"--%><%--@declare id="nationality"--%>
                 <label for="name">Name:</label>
                 <input type="text" name="name" value="" />
@@ -45,7 +47,7 @@
                 <input type="submit" name="search" value="Search" />
         </div>
         <div>
-            <table border="2">
+            <table border="2px solid">
                 <thead>
                 <tr>
                     <th>Name</th>
@@ -61,8 +63,8 @@
                     <td><%=u.getSurname()%></td>
                     <td><%=u.getNationality().getName()==null?"N/A":u.getNationality().getName()%></td>
                     <td>
-                        <input type="submit" name="action" value="Delete"/>
-                        <input type="submit" name="action" value="Update"/>
+                        <input type="submit" name="action" value="Delete" class="btn"/>
+                        <input type="submit" name="action" value="Update" class="btn"/>
                     </td>
                 </tr>
                 <%}%>
