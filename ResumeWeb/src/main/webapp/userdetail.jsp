@@ -19,19 +19,17 @@
 <body>
 <%
     UserDaoInter userDao = Context.instanceUSerDao();
-//            if(request.getParameter("save")!=null && request.getParameter("save").equals("Save")){
-//            int id = Integer.valueOf(request.getParameter("id"));
-//            String name = request.getParameter("name");
-//            String surname = request.getParameter("surname");
-//
-//            User user = userDao.getById(id);
-//            user.setName(name);
-//            user.setSurname(surname);
-//
-//            userDao.updateUser(user);
-//            response.sendRedirect("user.jsp");
-//            }
-    User u = userDao.getById(1);
+    String userIdStr=request.getParameter("id");
+    if(userIdStr==null || userIdStr.trim().isEmpty()){%>
+specificy id
+     <%
+    }else{
+    Integer userId=Integer.parseInt(userIdStr);
+    User u = userDao.getById(userId);
+    if(u==null){%>
+    There is no user with this id
+<%
+    }else{
 %>
 <form action="UserController" method="POST">
     <div>
@@ -53,6 +51,7 @@
             <input type="submit" name="save" value="Save" />
     </div>
 </form>
-
+<%}%>
+<%}%>
 </body>
 </html>

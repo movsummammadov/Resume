@@ -38,7 +38,7 @@ public class UserController extends HttpServlet {
 
         userDao.updateUser(user);
 
-        response.sendRedirect("user.jsp");
+        response.sendRedirect("userdetail.jsp");
     }
 }
 
