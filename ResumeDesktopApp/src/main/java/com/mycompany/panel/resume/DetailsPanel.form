@@ -53,7 +53,9 @@
                       <Component id="txtAddress" alignment="0" max="32767" attributes="0"/>
                       <Component id="cbNationality" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="456" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="121" max="-2" attributes="0"/>
+                  <Component id="jToggleButton1" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="230" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -89,8 +91,9 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lblNationality" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="cbNationality" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jToggleButton1" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="262" max="32767" attributes="0"/>
+                  <EmptySpace pref="259" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -153,6 +156,11 @@
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Country&gt;"/>
           </AuxValues>
+        </Component>
+        <Component class="javax.swing.JToggleButton" name="jToggleButton1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="jToggleButton1"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

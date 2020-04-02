@@ -87,6 +87,7 @@ public class DetailsPanel extends javax.swing.JPanel {
         lblNationality = new javax.swing.JLabel();
         cbCountry = new javax.swing.JComboBox<>();
         cbNationality = new javax.swing.JComboBox<>();
+        jToggleButton1 = new javax.swing.JToggleButton();
 
         lblAddress.setText("Address");
 
@@ -99,6 +100,8 @@ public class DetailsPanel extends javax.swing.JPanel {
         lblBirthplace.setText("Birthplace");
 
         lblNationality.setText("Nationality");
+
+        jToggleButton1.setText("jToggleButton1");
 
         javax.swing.GroupLayout pnlDetailsLayout = new javax.swing.GroupLayout(pnlDetails);
         pnlDetails.setLayout(pnlDetailsLayout);
@@ -121,7 +124,9 @@ public class DetailsPanel extends javax.swing.JPanel {
                     .addComponent(txtPhone, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtAddress, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cbNationality, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(456, Short.MAX_VALUE))
+                .addGap(121, 121, 121)
+                .addComponent(jToggleButton1)
+                .addContainerGap(230, Short.MAX_VALUE))
         );
         pnlDetailsLayout.setVerticalGroup(
             pnlDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -149,8 +154,9 @@ public class DetailsPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNationality)
-                    .addComponent(cbNationality, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(262, Short.MAX_VALUE))
+                    .addComponent(cbNationality, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jToggleButton1))
+                .addContainerGap(259, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -169,6 +175,7 @@ public class DetailsPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<Country> cbCountry;
     private javax.swing.JComboBox<Country> cbNationality;
+    private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JLabel lblAddress;
     private javax.swing.JLabel lblBirthdate;
     private javax.swing.JLabel lblBirthplace;
