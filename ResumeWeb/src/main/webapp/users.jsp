@@ -73,9 +73,12 @@
                     <button class="btn btn-danger" type="submit" title="delete" value="delete" name="action">
                         <i class="fas fa-trash-alt"></i>
                     </button>
-                    <button class="btn btn-primary" type="submit" title="update" value="update" name="action">
-                        <i class="fas fa-pen-square"></i>
-                    </button>
+                    <form action="userdetail" method="GET">
+                        <input type="hidden" name="id" value="<%=u.getId()%>" />
+                        <button class="btn btn-primary" type="submit" title="update" value="update" name="action">
+                            <i class="fas fa-pen-square"></i>
+                        </button>
+                    </form>
                 </td>
             </tr>
             <%}%>
