@@ -1,9 +1,12 @@
 package com.mycompany.resume.controller;
 
 import com.mycompany.dao.inter.UserDaoInter;
+import com.mycompany.entity.Country;
 import com.mycompany.entity.User;
 import com.mycompany.main.Context;
 import java.io.IOException;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -24,19 +27,35 @@ public class UserDetailController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int id=Integer.parseInt(request.getParameter("id"));
-        String name=request.getParameter("name");
-        String surname=request.getParameter("surname");
-        String email=request.getParameter("email");
-        String address=request.getParameter("address");
+        try {
+            int id=Integer.parseInt(request.getParameter("id"));
+            String action=request.getParameter("action");
+            if("delete".equals(action)){
+                userDao.removeUser(id);
+            }else {
+                String name = request.getParameter("name");
+                String surname = request.getParameter("surname");
+                String email = request.getParameter("email");
+                String phone = request.getParameter("phone");
+                String address = request.getParameter("address");
+                String profileDesc = request.getParameter("profileDesc");
+                String birthdateStr = request.getParameter("birthdate");
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                Date birthdate = new Date(sdf.parse(birthdateStr).getTime());
+                User user = userDao.getById(id);
+                user.setName(name);
+                user.setSurname(surname);
+                user.setEmail(email);
+                user.setPhone(phone);
+                user.setAddress(address);
+                user.setProfileDescription(profileDesc);
+                user.setBirthdate(birthdate);
 
-        User user=userDao.getById(id);
-        user.setName(name);
-        user.setSurname(surname);
-        user.setEmail(email);
-        user.setAddress(address);
-
-        userDao.updateUser(user);
+                userDao.updateUser(user);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
 
         response.sendRedirect("users");
     }

@@ -35,6 +35,8 @@ public class MyFavoritePage extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
+            String s=MyFavoritePage.getAllDataFromRequest(request);
+            System.out.println("s="+s);
 //
 //            String name = String.valueOf(request.getParameter("name"));
 //            skillDao.addSkill(new Skill(0, name));
@@ -55,7 +57,7 @@ public class MyFavoritePage extends HttpServlet {
                 out.println("<title>Servlet MyFavoritePages</title>");
                 out.println("</head>");
                 out.println("<body>");
-                out.println("a=" + a);
+//                out.println("a=" + a);
 //            for (User user : users) {
                 out.println(skillDao.getAllSkill());
 //            }

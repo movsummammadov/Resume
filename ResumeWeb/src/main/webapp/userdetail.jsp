@@ -7,8 +7,10 @@
 --%>
 
 <%@page import="com.mycompany.entity.User"%>
-<%@page import="com.mycompany.main.Context"%>
-<%@page import="com.mycompany.dao.inter.UserDaoInter"%>
+<%@ page import="com.mycompany.entity.Country" %>
+<%@ page import="com.mycompany.dao.inter.CountryDaoInter" %>
+<%@ page import="com.mycompany.main.Context" %>
+<%@ page import="java.util.List" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -21,46 +23,54 @@
 <body>
 <%
     User u=(User) request.getAttribute("user");
+    CountryDaoInter countryDao= Context.instanceCountryDao();
+    List<Country> country=countryDao.getAllCountry();
 %>
 <div>
-    <div class="container mycontainer">
+    <div class="container">
         <div class="col-4">
             <form action="userdetail" method="POST">
-        <%--@declare id="surname"--%>
-        <%--@declare id="name"--%>
-            <input type="hidden" name="id" value="<%=u.getId()%>" />
-            <div class="form-group">
-            <label for="name">Name:</label>
-            <input type="text" name="name" class="form-control" value="<%=u.getName()%>" />
-            </div>
-            <div class="form-group">
-            <label for="surname">Surname:</label>
-            <input type="text" name="surname" class="form-control" value="<%=u.getSurname()%>" />
-            </div>
-            <div class="form-group">
-            <label for="surname">Email:</label>
-            <input type="email" name="email" class="form-control" value="<%=u.getEmail()%>" />
-            </div>
-            <div class="form-group">
-                <%--@declare id="phone"--%><label for="phone">Phone:</label>
-                <input type="text" name="phone" class="form-control" value="<%=u.getPhone()%>" />
-            </div>
-            <div class="form-group">
-            <%--@declare id="address"--%><label for="address">Address:</label>
-            <input type="text" name="address" class="form-control" value="<%=u.getAddress()%>" />
-            </div>
-            <div class="form-group">
-                <%--@declare id="profiledesc"--%><label for="profileDesc">Profile Description:</label>
-                    <textarea name="profileDesc" class="form-control" >
+                <input type="hidden" name="id" value="<%=u.getId()%>" />
+                <div class="form-group">
+                    <%--@declare id="name"--%><label for="name">Name:</label>
+                    <input type="text" name="name" class="form-control" value="<%=u.getName()%>" />
+                </div>
+                <div class="form-group">
+                    <%--@declare id="surname"--%><label for="surname">Surname:</label>
+                    <input type="text" name="surname" class="form-control" value="<%=u.getSurname()%>" />
+                </div>
+                <div class="form-group">
+                    <%--@declare id="email"--%><label for="email">Email:</label>
+                    <input type="email" name="email" class="form-control" value="<%=u.getEmail()%>" />
+                </div>
+                <div class="form-group">
+                    <%--@declare id="phone"--%><label for="phone">Phone:</label>
+                    <input type="text" name="phone" class="form-control" value="<%=u.getPhone()%>" />
+                </div>
+                <div class="form-group">
+                    <%--@declare id="address"--%><label for="address">Address:</label>
+                    <input type="text" name="address" class="form-control" value="<%=u.getAddress()%>" />
+                </div>
+                <div class="form-group">
+                    <%--@declare id="profiledesc"--%><label for="profileDesc">Profile Description:</label>
+                    <textarea name="profileDesc" class="form-control">
                         <%=u.getProfileDescription()%>
                     </textarea>
-            </div>
-            <div class="form-group">
-                <%--@declare id="birthdate"--%><label for="birthdate">Birthdate:</label>
-                <input type="date" name="birthdate" class="form-control" value="<%=u.getBirthdate()%>"/>
-            </div>
-            <input  class="btn btn-primary" type="submit" name="save" value="Save" />
-    </form>
+                 </div>
+                <div class="form-group">
+                    <%--@declare id="birthdate"--%><label for="birthdate">Birthdate:</label>
+                    <input type="date" name="birthdate" class="form-control" value="<%=u.getBirthdate()%>"/>
+                </div>
+                <div class="form-group">
+                    <%--@declare id="birthplace"--%><label for="birthplace">Birthplace:</label>
+                    <select name="birthplace">
+                        <%for(Country c:country){%>
+                        <option><%=c%></option>
+                        <%}%>
+                    </select>
+                </div>
+                <input  class="btn btn-primary" type="submit" name="save" value="Save" />
+            </form>
         </div>
     </div>
 </div>

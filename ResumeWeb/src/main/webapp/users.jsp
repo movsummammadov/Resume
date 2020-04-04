@@ -22,20 +22,12 @@
 </head>
 <body>
 <%
-    UserDaoInter userDao = Context.instanceUSerDao();
-    String name=request.getParameter("name");
-    String surname=request.getParameter("surname");
-    String nationalityIdStr=request.getParameter("nId");
-    Integer nationaltyId=null;
-    if(nationalityIdStr!=null && !nationalityIdStr.trim().isEmpty()){
-    nationaltyId=Integer.parseInt(request.getParameter(nationalityIdStr));}
-    List<User> list = userDao.getAllUser(name,surname,nationaltyId);
-
+    List<User> list=(List<User>) request.getAttribute("list");
 %>
 <div class="container mycontainer">
     <div >
         <div class="col-4">
-        <form action="users.jsp" method="GET">
+        <form action="users" method="GET">
             <%--@declare id="surname"--%><%--@declare id="name"--%><%--@declare id="nationality"--%>
             <div class="form-group">
                 <label for="name">Name:</label>
@@ -61,6 +53,7 @@
                 <th>Surname</th>
                 <th>Nationality</th>
                 <th></th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
@@ -69,13 +62,20 @@
                 <td><%=u.getName()%></td>
                 <td><%=u.getSurname()%></td>
                 <td><%=u.getNationality().getName()==null?"N/A":u.getNationality().getName()%></td>
-                <td>
-                    <button class="btn btn-danger" type="submit" title="delete" value="delete" name="action">
-                        <i class="fas fa-trash-alt"></i>
-                    </button>
+                <td class="td_btn_view">
+                    <form action="userdetail" method="POST">
+                        <input type="hidden" name="id" value="<%=u.getId()%>" />
+                        <input type="hidden" name="action" value="delete" />
+                        <button class="btn btn-danger" type="submit" title="delete" value="delete">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </form>
+                </td>
+                <td class="td_btn_view">
                     <form action="userdetail" method="GET">
                         <input type="hidden" name="id" value="<%=u.getId()%>" />
-                        <button class="btn btn-primary" type="submit" title="update" value="update" name="action">
+                        <input type="hidden" name="action" value="update" />
+                        <button class="btn btn-primary" type="submit" title="update" value="update">
                             <i class="fas fa-pen-square"></i>
                         </button>
                     </form>

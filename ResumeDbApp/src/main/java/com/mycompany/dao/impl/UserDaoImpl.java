@@ -132,7 +132,7 @@ public class UserDaoImpl extends AbstractDao implements UserDaoInter {
     public boolean updateUser(User u) {
         try (Connection c = connect()) {
             PreparedStatement stmt = c.prepareStatement("update user set name=?, surname=?, email=?, phone=?,"
-                    + "address=?, profile_description=?, birthdate=?, birthplace_id=?, nationality_id=? where id=?");
+                    + " address=?, profile_description=?, birthdate=?, birthplace_id=?, nationality_id=? where id=?");
             stmt.setString(1, u.getName());
             stmt.setString(2, u.getSurname());
             stmt.setString(3, u.getEmail());
