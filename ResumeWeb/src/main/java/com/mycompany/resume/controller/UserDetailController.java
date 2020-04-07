@@ -32,7 +32,7 @@ public class UserDetailController extends HttpServlet {
             String action=request.getParameter("action");
             if("delete".equals(action)){
                 userDao.removeUser(id);
-            }else {
+            }else{
                 String name = request.getParameter("name");
                 String surname = request.getParameter("surname");
                 String email = request.getParameter("email");
@@ -42,6 +42,12 @@ public class UserDetailController extends HttpServlet {
                 String birthdateStr = request.getParameter("birthdate");
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 Date birthdate = new Date(sdf.parse(birthdateStr).getTime());
+                String birthplaceStr=request.getParameter("birthplace");
+                String[] arr=birthplaceStr.split("\\(");
+                String bp=arr[0];
+                Country c=new Country(0,bp,null);
+                System.out.println(c);
+                System.out.println(bp);
                 User user = userDao.getById(id);
                 user.setName(name);
                 user.setSurname(surname);
@@ -50,6 +56,7 @@ public class UserDetailController extends HttpServlet {
                 user.setAddress(address);
                 user.setProfileDescription(profileDesc);
                 user.setBirthdate(birthdate);
+               // user.setBirthplace(birthplace);
 
                 userDao.updateUser(user);
             }
@@ -67,7 +74,6 @@ public class UserDetailController extends HttpServlet {
             String userIdStr = request.getParameter("id");
             if (userIdStr == null || userIdStr.trim().isEmpty()) {//musterinin id-ni gonderib gondermediyi yoxlanilir
                 throw new IllegalArgumentException("id is not specified");
-//           request.setAttribute("msg","specify id");
             }
             Integer userId = Integer.parseInt(userIdStr);
             UserDaoInter userDao = Context.instanceUSerDao();

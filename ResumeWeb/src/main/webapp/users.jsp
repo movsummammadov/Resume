@@ -7,8 +7,6 @@
 --%>
 
 <%@page import="com.mycompany.entity.User"%>
-<%@page import="com.mycompany.main.Context"%>
-<%@page import="com.mycompany.dao.inter.UserDaoInter"%>
 <%@ page import="java.util.List" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -18,6 +16,10 @@
     <link rel="stylesheet" href="assets/css/users.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="assets/js/users.js"></script>
     <title>Search Page</title>
 </head>
 <body>
@@ -27,11 +29,14 @@
 <div class="container mycontainer">
     <div >
         <div class="col-4">
-        <form action="users" method="GET">
+        <form action="usersErrorController" method="GET">
             <%--@declare id="surname"--%><%--@declare id="name"--%><%--@declare id="nationality"--%>
             <div class="form-group">
                 <label for="name">Name:</label>
-                <input type="text" placeholder="Enter your name" class="form-control" name="name" value="" />
+                <input <%--onkeyup="writeIamtyping()"--%> type="text" placeholder="Enter your name" class="form-control" name="name" value=""
+<%--                       id="whatIamtyping"--%> />
+<%--                Text here:--%>
+<%--                <span id="typing"></span>--%>
             </div>
             <div class="form-group">
                 <label for="surname">Surname:</label>
@@ -63,13 +68,13 @@
                 <td><%=u.getSurname()%></td>
                 <td><%=u.getNationality().getName()==null?"N/A":u.getNationality().getName()%></td>
                 <td class="td_btn_view">
-                    <form action="userdetail" method="POST">
-                        <input type="hidden" name="id" value="<%=u.getId()%>" />
-                        <input type="hidden" name="action" value="delete" />
-                        <button class="btn btn-danger" type="submit" title="delete" value="delete">
-                            <i class="fas fa-trash-alt"></i>
-                        </button>
-                    </form>
+                    <input type="hidden" name="id" value="<%=u.getId()%>" />
+                    <input type="hidden" name="action" value="delete" />
+                    <button class="btn btn-danger" type="submit" title="delete" value="delete"
+                            data-toggle="modal" data-target="#exampleModal"
+                            onclick="setIdForDelete(<%=u.getId()%>)">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
                 </td>
                 <td class="td_btn_view">
                     <form action="userdetail" method="GET">
@@ -84,6 +89,31 @@
             <%}%>
             </tbody>
         </table>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure
+            </div>
+            <div class="modal-footer">
+                <form action="userdetail" method="POST">
+                    <input type="hidden" name="id" value="" id="idForDelete"/>
+                    <input type="hidden" name="action" value="delete" />
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <input type="submit" class="btn btn-danger" value="Delete">
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 </body>

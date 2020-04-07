@@ -13,13 +13,13 @@ import java.io.IOException;
  *
  */
 
-@WebServlet(name = "ErrorController", urlPatterns = {"/error"})
-public class ErrorController extends HttpServlet {
+@WebServlet(name = "AdminLoginController", urlPatterns = {"/adminlogin"})
+public class AdminLoginController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("error.jsp").forward(request, response);
+        request.getRequestDispatcher("adminlogin.jsp").forward(request, response);
     }
 }
 

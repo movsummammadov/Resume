@@ -14,6 +14,8 @@ public interface UserDaoInter {
     List<User> getAllUser();
 
     List<User> getAllUser(String name,String surname,Integer nationalityId);
+
+    User findByEmailAndPassword(String email,String password);
     
     User getById(int UserId);
     
