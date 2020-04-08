@@ -25,7 +25,9 @@
 <body>
 <%
     List<User> list=(List<User>) request.getAttribute("list");
+    User user=(User) session.getAttribute("loggedInUser");
 %>
+<span style="color:red"><%="Welcome "+user.getName()%></span>
 <div class="container mycontainer">
     <div >
         <div class="col-4">

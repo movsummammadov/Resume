@@ -18,7 +18,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" href="assets/css/users.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <title>JSP Page</title>
+    <title>User Detail</title>
 </head>
 <body>
 <%
@@ -70,6 +70,7 @@
                     </select>
                 </div>
                 <input  class="btn btn-primary" type="submit" name="save" value="Save" />
+                <input type="hidden" name="action" value="update"/>
             </form>
         </div>
     </div>

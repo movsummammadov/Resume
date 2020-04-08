@@ -19,7 +19,7 @@ import com.mycompany.dao.inter.UserSkillDaoInter;
  */
 public class Context {
 
-    public static UserDaoInter instanceUSerDao() {
+    public static UserDaoInter instanceUserDao() {
         return new UserDaoImpl();
     }
 

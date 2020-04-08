@@ -2,6 +2,11 @@ function setIdForDelete(id){
     var elem=document.getElementById("idForDelete");
     elem.value=id;
 }
+function setIdForUpdate(id) {
+    var elem=document.getElementById("idForUpdate");
+    elem.value=id;
+}
+
 
 // function writeIamtyping() {
 //     var input=document.getElementById("whatIamtyping");

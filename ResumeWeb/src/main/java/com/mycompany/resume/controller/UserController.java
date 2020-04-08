@@ -21,7 +21,7 @@ import java.util.List;
 @WebServlet(name = "UserController", urlPatterns = {"/users"})
 public class UserController extends HttpServlet {
 
-    private UserDaoInter userDao=Context.instanceUSerDao();
+    private UserDaoInter userDao=Context.instanceUserDao();
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -31,7 +31,7 @@ public class UserController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        UserDaoInter userDao = Context.instanceUSerDao();
+        UserDaoInter userDao = Context.instanceUserDao();
         String name=request.getParameter("name");
         String surname=request.getParameter("surname");
         String nationalityIdStr=request.getParameter("nId");
