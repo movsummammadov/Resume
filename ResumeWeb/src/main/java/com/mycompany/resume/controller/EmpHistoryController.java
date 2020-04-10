@@ -35,7 +35,7 @@ public class EmpHistoryController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Integer id = Integer.parseInt(request.getParameter("id"));
+        Integer id = Integer.valueOf(request.getParameter("id"));
         String action=request.getParameter("action");
         if("delete".equals(action)){
             empDao.removeEmploymentHistory(id);
@@ -52,7 +52,10 @@ public class EmpHistoryController extends HttpServlet {
                 emp.setBeginDate(beginDate);
                 emp.setEndDate(endDate);
                 emp.setJobDescription(jobDesc);
-                empDao.updateEmploymentHistory(emp);
+                System.out.println("a="+action);
+                if("update".equals(action)) {
+                    empDao.addEmploymentHistory(emp);
+                }
             }catch(Exception ex){
                 ex.printStackTrace();
                 ControllerUtil.errorPage(response,new IllegalArgumentException("Tarixi duzgun daxil edin"));

@@ -19,7 +19,7 @@ public class SecurityFilter implements Filter {
         if(!req.getRequestURI().contains("/login") && req.getSession().getAttribute("loggedInUser")==null){
             res.sendRedirect("login");
         }else{
-            chain.doFilter(request,response);
+            chain.doFilter(request,response);//novbeti merheleye oturur
         }
     }
 }

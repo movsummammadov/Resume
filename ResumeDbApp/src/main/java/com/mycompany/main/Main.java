@@ -2,8 +2,11 @@ package com.mycompany.main;
 
 import com.mycompany.dao.inter.EmploymentHistoryDaoInter;
 import com.mycompany.dao.inter.SkillDaoInter;
+import com.mycompany.dao.inter.UserDaoInter;
+import com.mycompany.entity.Country;
 import com.mycompany.entity.EmploymentHistory;
 import com.mycompany.entity.Skill;
+import com.mycompany.entity.User;
 
 import java.util.List;
 
@@ -17,8 +20,10 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) throws Exception {
-        SkillDaoInter userSkill=Context.instanceSkillDao();
-        List<Skill> list=userSkill.getAllSkill();
-        System.out.println(list);
+        UserDaoInter userDao=Context.instanceUserDao();
+       User u=userDao.getById(3);
+       u.setPassword("12345");
+        userDao.updateUser(u);
+
     }
 }

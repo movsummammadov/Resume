@@ -16,6 +16,7 @@ public class User {
     private String email;
     private String phone;
     private String address;
+    private String password;
     private String profileDescription;
     private Date birthdate;
     private Country birthplace;
@@ -120,6 +121,14 @@ public class User {
 
     public void setNationality(Country nationality) {
         this.nationality = nationality;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public List<UserSkill> getSkills() {

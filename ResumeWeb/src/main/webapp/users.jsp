@@ -13,14 +13,14 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link rel="stylesheet" href="assets/css/users.css">
+
+    <title>Search Page</title> <link rel="stylesheet" href="assets/css/users.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="assets/js/users.js"></script>
-    <title>Search Page</title>
 </head>
 <body>
 <%
@@ -30,6 +30,9 @@
 <span style="color:red"><%="Welcome "+user.getName()%></span>
 <div class="container mycontainer">
     <div >
+        <form action="logout" method="POST">
+            <input class="btn btn-primary" type="submit" name="logout" value="Log out"/>
+        </form>
         <div class="col-4">
         <form action="usersErrorController" method="GET">
             <%--@declare id="surname"--%><%--@declare id="name"--%><%--@declare id="nationality"--%>
@@ -43,10 +46,6 @@
             <div class="form-group">
                 <label for="surname">Surname:</label>
                 <input type="text" placeholder="Enter your surname" class="form-control" name="surname" value="" />
-            </div>
-            <div class="form-group">
-                <label for="nationality">Nationality:</label>
-                <input type="text" placeholder="Enter your nationality" class="form-control" name="nationality" value="" />
             </div>
             <input class="btn btn-primary" type="submit" name="search" value="Search"/>
         </form>
