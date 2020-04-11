@@ -1,0 +1,14 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+<!--  <servlet>-->
+<!--    <servlet-name>UserController</servlet-name>-->
+<!--    <servlet-class>com.mycompany.resume.controller.UserDetailController</servlet-class>-->
+<!--  </servlet>-->
+<!--  <servlet-mapping>-->
+<!--    <servlet-name>UserController</servlet-name>-->
+<!--    <url-pattern>userdetail</url-pattern>-->
+<!--  </servlet-mapping>-->
+</web-app>
