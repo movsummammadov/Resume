@@ -1,7 +1,11 @@
 package com.mycompany.main;
 
 import com.mycompany.dao.inter.UserDaoInter;
+import com.mycompany.entity.EmploymentHistory;
 import com.mycompany.entity.User;
+import com.mycompany.entity.UserSkill;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -15,8 +19,7 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
         UserDaoInter userDao=Context.instanceUserDao();
-       User u=userDao.getById(1);
-        System.out.println(u.getEmail());
+        System.out.println(userDao.removeUser(13));
 
     }
 }

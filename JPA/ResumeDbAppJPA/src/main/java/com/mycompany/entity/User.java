@@ -12,6 +12,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -83,12 +84,12 @@ public class User implements Serializable {
     @JoinColumns({
         @JoinColumn(name = "birthplace_id", referencedColumnName = "id"),
         @JoinColumn(name = "birthplace_id", referencedColumnName = "id")})
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Country birthplace;
     @JoinColumns({
         @JoinColumn(name = "nationality_id", referencedColumnName = "id"),
         @JoinColumn(name = "nationality_id", referencedColumnName = "id")})
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Country nationality;
 
     public User() {

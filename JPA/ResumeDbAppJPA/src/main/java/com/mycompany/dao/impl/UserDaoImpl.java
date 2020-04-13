@@ -126,69 +126,46 @@ public class UserDaoImpl extends AbstractDao implements UserDaoInter {
 
     @Override
     public User getById(int userId) {
-        EntityManagerFactory emfactory = Persistence.createEntityManagerFactory("resumeappPU");
-        EntityManager entityManager = emfactory.createEntityManager();
-        User user=entityManager.find(User.class, userId);
+        EntityManager em=em();
+        User user=em.find(User.class, userId);
+        em.close();
         return user;
+    }
+     @Override
+    public boolean removeUser(int userId) {
+        EntityManager em=em();
+        User user=em.find(User.class, userId);
+        em.getTransaction().begin();
+        em.remove(user);
+        em.getTransaction().commit();
+        em.close();
+        return true;
     }
 
     private BCrypt.Hasher crypt = BCrypt.withDefaults();
 
     @Override
     public boolean updateUser(User u) {
-        try (Connection c = connect()) {
-            PreparedStatement stmt = c.prepareStatement("update user set name=?, surname=?, email=?, phone=?,"
-                    + " address=?, profile_description=?, birthdate=?, birthplace_id=?, nationality_id=?,password=? where id=?");
-            stmt.setString(1, u.getName());
-            stmt.setString(2, u.getSurname());
-            stmt.setString(3, u.getEmail());
-            stmt.setString(4, u.getPhone());
-            stmt.setString(5, u.getAddress());
-            stmt.setString(6, u.getProfileDescription());
-//            stmt.setDate(7, u.getBirthdate());
-//            stmt.setInt(8, u.getBirthplace().getId());
-//            stmt.setInt(9, u.getNationality().getId());
-            stmt.setString(10, crypt.hashToString(4, u.getPassword().toCharArray()));
-            stmt.setInt(11, u.getId());
-            return stmt.execute();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            return false;
-        }
+        //u.setPassword(crypt.hashToString(4, u.getPassword().toCharArray()));
+        EntityManager em=em();
+        em.getTransaction().begin();
+        em.merge(u);
+        em.getTransaction().commit();
+        em.close();
+        return true;
     }
 
-    @Override
-    public boolean removeUser(int userId) {
-        try (Connection c = connect()) {
-            Statement stmt = c.createStatement();
-            return stmt.execute("delete from user where id=" + userId);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            return false;
-        }
-    }
-
+ 
+    
     @Override
     public boolean addUser(User u) {
-        try (Connection c = connect()) {
-            PreparedStatement stmt = c.prepareStatement("insert into user(name,surname,email,phone,"
-                    + "address,profile_description,birthdate,birthplace_id,nationality_id,password)"
-                    + " values(?,?,?,?,?,?,?,?,?,?)");
-            stmt.setString(1, u.getName());
-            stmt.setString(2, u.getSurname());
-            stmt.setString(3, u.getEmail());
-            stmt.setString(4, u.getPhone());
-            stmt.setString(5, u.getAddress());
-            stmt.setString(6, u.getProfileDescription());
-//            stmt.setDate(7, u.getBirthdate());
-//            stmt.setInt(8, u.getBirthplace().getId());
-//            stmt.setInt(9, u.getNationality().getId());
-            stmt.setString(10, crypt.hashToString(4, u.getPassword().toCharArray()));
-            return stmt.execute();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            return false;
-        }
+        u.setPassword(crypt.hashToString(4, u.getPassword().toCharArray()));
+        EntityManager em=em();
+        em.getTransaction().begin();
+        em.persist(u);
+        em.getTransaction().commit();
+        em.close();
+        return true;
     }
 
 }
