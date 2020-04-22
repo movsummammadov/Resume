@@ -3,18 +3,13 @@ package com.mycompany.dao.impl;
 import at.favre.lib.crypto.bcrypt.BCrypt;
 import com.mycompany.dao.inter.AbstractDao;
 import com.mycompany.dao.inter.UserDaoInter;
-import com.mycompany.entity.Country;
 import com.mycompany.entity.User;
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 /**
  *
@@ -27,114 +22,135 @@ public class UserDaoImpl extends AbstractDao implements UserDaoInter {
 
     @Override
     public List<User> getAllUser() {
-        List<User> result = new ArrayList<>();
-        try (Connection c = connect()) {
-            Statement stmt = c.createStatement();
-            stmt.execute("SELECT"
-                    + "	u.*,"
-                    + "	c.name birthplace,"
-                    + "	n.nationality "
-                    + " FROM USER u"
-                    + "	LEFT JOIN country c ON u.birthplace_id = c.id"
-                    + "	LEFT JOIN country n ON u.nationality_id = n.id");
-            ResultSet rs = stmt.getResultSet();
-            while (rs.next()) {
-//                result.add(getUser(rs));
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return result;
+        EntityManager em = em();
+        Query q = em.createQuery("select u from User u");
+        return q.getResultList();
+
     }
 
     @Override
     public List<User> getAllUser(String name, String surname, Integer nationalityId) {
-        List<User> result = new ArrayList<>();
-        try (Connection c = connect()) {
-            String sql = "SELECT"
-                    + "	u.*,"
-                    + "	c.name birthplace,"
-                    + "	n.nationality "
-                    + " FROM USER u"
-                    + "	LEFT JOIN country c ON u.birthplace_id = c.id"
-                    + "	LEFT JOIN country n ON u.nationality_id = n.id where 1+1 ";
-            if (name != null && !name.trim().isEmpty()) {
-                sql += " and u.name=? ";
-            }
-            if (surname != null && !surname.trim().isEmpty()) {
-                sql += " and u.surname=? ";
-            }
-            if (nationalityId != null) {
-                sql += " and u.nationality_id=? ";
-            }
-            PreparedStatement stmt = c.prepareStatement(sql);
-            int i = 1;
-            if (name != null && !name.trim().isEmpty()) {
-                stmt.setString(i, name);
-                i++;
-            }
-            if (surname != null && !surname.trim().isEmpty()) {
-                stmt.setString(i, surname);
-                i++;
-            }
-            if (nationalityId != null) {
-                stmt.setInt(i, nationalityId);
-            }
-            stmt.execute();
-            ResultSet rs = stmt.getResultSet();
-            while (rs.next()) {
-//                result.add(getUser(rs));
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        EntityManager em = em();
+        String jpql = "select u from User u where 1=1";
+        if (name != null && !name.trim().isEmpty()) {
+            jpql += " and u.name=:name ";
         }
-        return result;
+        if (surname != null && !surname.trim().isEmpty()) {
+            jpql += " and u.surname=:surname ";
+        }
+        if (nationalityId != null) {
+            jpql += " and u.nationality.id=: nid";
+        }
+
+        Query q = em.createQuery(jpql, User.class);
+        if (name != null && !name.trim().isEmpty()) {
+            q.setParameter("name", name);
+        }
+        if (surname != null && !surname.trim().isEmpty()) {
+            q.setParameter("surname", surname);
+        }
+        if (nationalityId != null) {
+            q.setParameter("nid", nationalityId);
+        }
+        return q.getResultList();
     }
 
     @Override
     public User findByEmailAndPassword(String email, String password) {
-        User u = null;
-        try (Connection c = connect()) {
-            PreparedStatement stmt = c.prepareStatement("select * from user where email=? and password=?");
-            stmt.setString(1, email);
-            stmt.setString(2, password);
-            ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {
-//                u=getUserSimple(rs);
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        EntityManager em = em();
+        Query q = em.createQuery("select u from User u where u.email= :e and u.password= :p", User.class);
+        q.setParameter("e", email);
+        q.setParameter("p", password);
+        List<User> list = q.getResultList();
+        if (list.size() == 1) {
+            return list.get(0);
         }
-        return u;
+        return null;
     }
+    
+//    CriteriaBuilder
+//     @Override
+//    public User findByEmailAndPassword(String email, String password) {
+//        EntityManager em = em();
+//        CriteriaBuilder cb= em.getCriteriaBuilder();
+//        CriteriaQuery<User> q1=cb.createQuery(User.class);
+//        Root<User> root=q1.from(User.class);
+//        CriteriaQuery<User> q2=q1.where(cb.equal(root.get("email"),email),cb.equal(root.get("password"), password));
+//        Query q=em.createQuery(q2);
+//        List<User> list = q.getResultList();
+//        if (list.size() == 1) {
+//            return list.get(0);
+//        }
+//        return null;
+//    }
+
 
     @Override
     public User findByEmail(String email) {
-        User u = null;
-        try (Connection c = connect()) {
-            PreparedStatement stmt = c.prepareStatement("select * from user where email=?");
-            stmt.setString(1, email);
-            ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {
-//                u=getUserSimple(rs);
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        EntityManager em = em();
+        Query q = em.createQuery("select u from User u where u.email=:e", User.class);
+        q.setParameter("e", email);
+        List<User> list = q.getResultList();
+        if (list.size() == 1) {
+            return list.get(0);
         }
-        return u;
+        return null;
     }
-
+    
+//   Native Sql query
+//     @Override
+//    public User findByEmail(String email) {
+//        EntityManager em = em();
+//        Query q = em.createNativeQuery("select * from User u where u.email=?", User.class);
+//        q.setParameter(1, email);
+//        List<User> list = q.getResultList();
+//        if (list.size() == 1) {
+//            return list.get(0);
+//        }
+//        return null;
+//    }
+    
+//    NamedQuery
+//       @Override
+//    public User findByEmail(String email) {
+//        EntityManager em = em();
+//        Query q = em.createNamedQuery("User.findByEmail", User.class);
+//        q.setParameter("email", email);
+//        List<User> list = q.getResultList();
+//        if (list.size() == 1) {
+//            return list.get(0);
+//        }
+//        return null;
+//    }
+    
+//    CriteriaBuilder
+//    @Override
+//    public User findByEmail(String email) {
+//        EntityManager em = em();
+//        CriteriaBuilder cb=em.getCriteriaBuilder();
+//        CriteriaQuery<User> q1=cb.createQuery(User.class);
+//        Root<User> postRoot=q1.from(User.class);
+//        CriteriaQuery<User> q2=q1.where(cb.equal(postRoot.get("email"), email));
+//        Query q = em.createQuery(q2);
+//        List<User> list = q.getResultList();
+//        if (list.size() == 1) {
+//            return list.get(0);
+//        }
+//        return null;
+//    }
+    
     @Override
     public User getById(int userId) {
-        EntityManager em=em();
-        User user=em.find(User.class, userId);
+        EntityManager em = em();
+        User user = em.find(User.class, userId);
         em.close();
         return user;
     }
-     @Override
+
+    @Override
     public boolean removeUser(int userId) {
-        EntityManager em=em();
-        User user=em.find(User.class, userId);
+        EntityManager em = em();
+        User user = em.find(User.class, userId);
         em.getTransaction().begin();
         em.remove(user);
         em.getTransaction().commit();
@@ -146,8 +162,8 @@ public class UserDaoImpl extends AbstractDao implements UserDaoInter {
 
     @Override
     public boolean updateUser(User u) {
-        //u.setPassword(crypt.hashToString(4, u.getPassword().toCharArray()));
-        EntityManager em=em();
+//        u.setPassword(crypt.hashToString(4, u.getPassword().toCharArray()));
+        EntityManager em = em();
         em.getTransaction().begin();
         em.merge(u);
         em.getTransaction().commit();
@@ -155,12 +171,10 @@ public class UserDaoImpl extends AbstractDao implements UserDaoInter {
         return true;
     }
 
- 
-    
     @Override
     public boolean addUser(User u) {
         u.setPassword(crypt.hashToString(4, u.getPassword().toCharArray()));
-        EntityManager em=em();
+        EntityManager em = em();
         em.getTransaction().begin();
         em.persist(u);
         em.getTransaction().commit();

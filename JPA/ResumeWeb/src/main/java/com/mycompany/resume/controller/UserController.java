@@ -31,7 +31,7 @@ public class UserController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        UserDaoInter userDao = Context.instanceUserDao();
+      //  UserDaoInter userDao = Context.instanceUserDao();
         String name=request.getParameter("name");
         String surname=request.getParameter("surname");
         String nationalityIdStr=request.getParameter("nId");

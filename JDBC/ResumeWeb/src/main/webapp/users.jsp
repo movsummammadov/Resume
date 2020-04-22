@@ -34,7 +34,7 @@
             <input class="btn btn-primary" type="submit" name="logout" value="Log out"/>
         </form>
         <div class="col-4">
-        <form action="usersErrorController" method="GET">
+        <form action="users" method="GET">
             <%--@declare id="surname"--%><%--@declare id="name"--%><%--@declare id="nationality"--%>
             <div class="form-group">
                 <label for="name">Name:</label>
@@ -67,7 +67,7 @@
             <tr>
                 <td><%=u.getName()%></td>
                 <td><%=u.getSurname()%></td>
-                <td><%=u.getNationality().getName()==null?"N/A":u.getNationality().getName()%></td>
+                <td><%=u.getNationality().getNationality()==null?"N/A":u.getNationality().getNationality()%></td>
                 <td class="td_btn_view">
                     <input type="hidden" name="id" value="<%=u.getId()%>" />
                     <input type="hidden" name="action" value="delete" />

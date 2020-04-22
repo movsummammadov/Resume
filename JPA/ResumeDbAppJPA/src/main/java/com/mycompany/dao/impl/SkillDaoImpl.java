@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.EntityManager;
 
 /**
  *
@@ -77,6 +78,7 @@ public class SkillDaoImpl extends AbstractDao implements SkillDaoInter {
 
     @Override
     public boolean removeSkill(int id) {
+        
        try(Connection c=connect()){
            Statement stmt=c.createStatement();
            return stmt.execute("delete from skill where id="+id);
@@ -88,15 +90,12 @@ public class SkillDaoImpl extends AbstractDao implements SkillDaoInter {
 
     @Override
     public boolean updateSkill(Skill s) {
-        try(Connection c=connect()){
-            PreparedStatement stmt=c.prepareStatement("update skill set name=? where id=?");
-            stmt.setString(1, s.getName());
-            stmt.setInt(2, s.getId());
-            return stmt.execute();
-        }catch(Exception ex){
-            ex.printStackTrace();
-            return false;
+        EntityManager em=em();
+        em.getTransaction().begin();
+        em.merge(s);
+        em.getTransaction().commit();
+        em.close();
+        return true;
         }
-    }
 
 }
