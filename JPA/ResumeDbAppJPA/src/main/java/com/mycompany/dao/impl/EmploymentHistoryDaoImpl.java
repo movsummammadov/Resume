@@ -3,101 +3,72 @@ package com.mycompany.dao.impl;
 import com.mycompany.dao.inter.AbstractDao;
 import com.mycompany.dao.inter.EmploymentHistoryDaoInter;
 import com.mycompany.entity.EmploymentHistory;
-import com.mycompany.entity.User;
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.ArrayList;
+
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import java.util.List;
 
 /**
  *
  * @author Movsum Mammadov
  *
- *
  */
 public class EmploymentHistoryDaoImpl extends AbstractDao implements EmploymentHistoryDaoInter {
 
-    private EmploymentHistory getEmploymentHistory(ResultSet rs) throws Exception {
-        int id = rs.getInt("id");
-        int userId = rs.getInt("user_id");
-        String header = rs.getString("header");
-        Date beginDate = rs.getDate("begin_date");
-        Date endDate = rs.getDate("end_date");
-        String jobDescription = rs.getString("job_description");
-       // return new EmploymentHistory(id, header, beginDate, endDate, jobDescription, new User(userId));
-       return null;
-
+    @Override
+    public List<EmploymentHistory> getAll() {
+        EntityManager em = em();
+        Query q=em.createQuery("select eh from EmploymentHistory eh");
+        List<EmploymentHistory> list=q.getResultList();
+        em.close();
+        return list;
     }
 
     @Override
-    public List<EmploymentHistory> getAllImploymentHistoryUserId(int userId) {
-        List<EmploymentHistory> result = new ArrayList<>();
-        try (Connection c = connect()) {
-            Statement stmt = c.createStatement();
-            stmt.execute("SELECT"
-                    + "	u.id user_id,"
-                    + "	em.*"
-                    + "FROM "
-                    + "	employment_history em"
-                    + "	LEFT JOIN USER u ON em.user_id = u.id"
-                    + "	where em.user_id=" + userId);
-            ResultSet rs = stmt.getResultSet();
-            while (rs.next()) {
-                result.add(getEmploymentHistory(rs));
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return result;
+    public List<EmploymentHistory> getAllImploymentHistoryByUserId(int userId) {
+        EntityManager em = em();
+        Query q = em.createQuery("select eh from EmploymentHistory eh where eh.user.id=:usid",EmploymentHistory.class);
+        q.setParameter("usid", userId);
+        List<EmploymentHistory> list = q.getResultList();
+        em.close();
+        return list;
     }
 
+    public EmploymentHistory getById(int id) {
+        EntityManager em=em();
+        EmploymentHistory employmentHistory=em.find(EmploymentHistory.class,id);
+        em.close();
+        return employmentHistory;
+    }
     @Override
     public boolean updateEmploymentHistory(EmploymentHistory eh) {
-        try (Connection c = connect()) {
-            PreparedStatement stmt = c.prepareStatement("update employment_history set header=?,begin_date=?,"
-                    + "end_date=?,job_description=?,user_id=? where id=?");
-//            stmt.setString(1, eh.getHeader());
-//            stmt.setDate(2, eh.getBeginDate());
-//            stmt.setDate(3, eh.getEndDate());
-            stmt.setString(4, eh.getJobDescription());
-            stmt.setInt(5, eh.getUser().getId());
-            stmt.setInt(6, eh.getId());
-            return stmt.execute();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            return false;
-        }
+        EntityManager em=em();
+        em.getTransaction().begin();
+        em.merge(eh);
+        em.getTransaction().commit();
+        em.close();
+        return true;
     }
 
     @Override
     public boolean removeEmploymentHistory(int id) {
-        try (Connection c = connect()) {
-            Statement stmt = c.createStatement();
-            return stmt.execute("delete from employment_history where id=" + id);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            return false;
-        }
+        EntityManager em=em();
+        EmploymentHistory eh=em.find(EmploymentHistory.class,id);
+        em.getTransaction().begin();
+        em.remove(eh);
+        em.getTransaction().commit();
+        em.close();
+        return true;
     }
 
     @Override
     public boolean addEmploymentHistory(EmploymentHistory eh) {
-        try (Connection c = connect()) {
-            PreparedStatement stmt = c.prepareStatement("insert into employment_history(header,begin_date,"
-                    + "end_date,job_description,user_id) values(?,?,?,?,?) ");
-            stmt.setString(1, eh.getHeader());
-//            stmt.setDate(2, eh.getBeginDate());
-//            stmt.setDate(3, eh.getEndDate());
-            stmt.setString(4, eh.getJobDescription());
-            stmt.setInt(5, eh.getUser().getId());
-            return stmt.execute();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            return false;
-        }
+        EntityManager em=em();
+        em.getTransaction().begin();
+        em.persist(eh);
+        em.getTransaction().commit();
+        em.close();
+        return true;
     }
 
 }

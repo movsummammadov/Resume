@@ -1,9 +1,8 @@
 package com.mycompany.main;
 
-import com.mycompany.dao.inter.UserDaoInter;
-import com.mycompany.entity.EmploymentHistory;
-import com.mycompany.entity.User;
-import com.mycompany.entity.UserSkill;
+import com.mycompany.dao.inter.*;
+import com.mycompany.entity.*;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.sql.Date;
@@ -20,8 +19,11 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) throws Exception {
-        UserDaoInter userDao=Context.instanceUserDao();
-        System.out.println( userDao.findByEmail("movsum617@gmail.com"));
+        SkillDaoInter countryDao=Context.instanceSkillDao();
 
+
+//        System.out.println(countryDao.addSkill(new Skill(null,"R")));
+        System.out.println(countryDao.getAllSkill());
+//        System.out.println(countryDao.removeSkill(79));
     }
 }

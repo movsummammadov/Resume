@@ -32,7 +32,7 @@ public class EmploymentHistoryDaoImpl extends AbstractDao implements EmploymentH
     }
 
     @Override
-    public List<EmploymentHistory> getAllImploymentHistoryUserId(int userId) {
+    public List<EmploymentHistory> getAllImploymentHistoryByUserId(int userId) {
         List<EmploymentHistory> result = new ArrayList<>();
         try (Connection c = connect()) {
             Statement stmt = c.createStatement();
@@ -46,6 +46,45 @@ public class EmploymentHistoryDaoImpl extends AbstractDao implements EmploymentH
             ResultSet rs = stmt.getResultSet();
             while (rs.next()) {
                 result.add(getEmploymentHistory(rs));
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return result;
+    }
+
+    @Override
+    public List<EmploymentHistory> getAllEmploymentHistory() {
+        List<EmploymentHistory> list = new ArrayList<>();
+        try (Connection c = connect()) {
+            Statement stmt = c.createStatement();
+            stmt.execute("SELECT * FROM employment_history");
+            ResultSet rs = stmt.getResultSet();
+            while (rs.next()) {
+                EmploymentHistory emp = getEmploymentHistory(rs);
+                list.add(emp);
+            }
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return list;
+    }
+
+    public EmploymentHistory getById(int id) {
+        EmploymentHistory result=null;
+        try (Connection c = connect()) {
+            Statement stmt = c.createStatement();
+            stmt.execute("SELECT"
+                    + "	u.id user_id,"
+                    + "	em.*"
+                    + "FROM "
+                    + "	employment_history em"
+                    + "	LEFT JOIN USER u ON em.user_id = u.id"
+                    + "	where em.user_id=" + id);
+            ResultSet rs = stmt.getResultSet();
+            while (rs.next()) {
+                result=getEmploymentHistory(rs);
             }
         } catch (Exception ex) {
             ex.printStackTrace();

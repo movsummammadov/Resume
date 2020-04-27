@@ -21,7 +21,7 @@ import javax.persistence.Table;
 
 /**
  *
- * @author movsu
+ * @author Movsum Mammadov
  */
 @Entity
 @Table(name = "user_skill")
@@ -114,7 +114,7 @@ public class UserSkill implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mycompany.entity.UserSkil1l[ id=" + id + " ]";
+        return "com.mycompany.entity.UserSkill[ id=" + id + " ]";
     }
     
 }

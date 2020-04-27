@@ -30,6 +30,7 @@
     <div class="container">
         <div class="col-4">
             <form action="userdetail" method="POST">
+                <input type="hidden" name="action" value="update"/>
                 <input type="hidden" name="id" value="<%=u.getId()%>" />
                 <div class="form-group">
                     <%--@declare id="name"--%><label for="name">Name:</label>
@@ -70,7 +71,6 @@
                     </select>
                 </div>
                 <input  class="btn btn-primary" type="submit" name="save" value="Save" />
-                <input type="hidden" name="action" value="update"/>
             </form>
         </div>
     </div>

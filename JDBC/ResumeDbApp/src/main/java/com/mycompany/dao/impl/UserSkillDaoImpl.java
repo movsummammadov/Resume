@@ -30,7 +30,7 @@ public class UserSkillDaoImpl extends AbstractDao implements UserSkillDaoInter {
     }
 
     @Override
-    public List<UserSkill> getUserSkillByUserId(int userId) {
+    public List<UserSkill> getAllUserSkillByUserId(int userId) {
         List<UserSkill> result = new ArrayList<>();
         try (Connection c = connect()) {
             PreparedStatement stmt = c.prepareStatement("SELECT"

@@ -31,7 +31,7 @@ import javax.persistence.TemporalType;
 
 /**
  *
- * @author movsu
+ * @author Movsum Mammadov
  */
 @Entity
 @Table(name = "user")

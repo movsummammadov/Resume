@@ -11,6 +11,8 @@ import java.util.List;
 public interface SkillDaoInter {
     
     List<Skill> getAllSkill();
+
+    List<Skill> getByName(String name);
     
     Skill getById(int id);
     

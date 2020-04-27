@@ -22,7 +22,7 @@ import javax.persistence.Table;
 
 /**
  *
- * @author movsu
+ * @author Movsum Mammadov
  */
 @Entity
 @Table(name = "country")
@@ -128,7 +128,7 @@ public class Country implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mycompany.entity.Country[ id=" + id + " ]";
+        return "com.mycompany.entity.Country[ id=" + id + "  name="+name+" ]";
     }
     
 }

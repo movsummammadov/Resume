@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface UserSkillDaoInter {
     
-    List<UserSkill> getUserSkillByUserId(int userId);
+    List<UserSkill> getAllUserSkillByUserId(int userId);
     
     boolean updateUserSkill(UserSkill usk);
     

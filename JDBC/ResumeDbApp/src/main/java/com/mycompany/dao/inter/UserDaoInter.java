@@ -17,7 +17,7 @@ public interface UserDaoInter {
 
     User findByEmailAndPassword(String email,String password);
 
-    public User findByEmail(String email);
+    User findByEmail(String email);
     
     User getById(int userId);
     

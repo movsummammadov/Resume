@@ -72,6 +72,8 @@ public class UserDetailController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String action=request.getParameter("action");
+        System.out.println(action);
         try {
             String userIdStr = request.getParameter("id");
             if (userIdStr == null || userIdStr.trim().isEmpty()) {//musterinin id-ni gonderib gondermediyi yoxlanilir

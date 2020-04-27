@@ -11,7 +11,11 @@ import java.util.List;
 
 public interface EmploymentHistoryDaoInter {
     
-    List<EmploymentHistory> getAllImploymentHistoryUserId(int userId);
+    List<EmploymentHistory> getAllImploymentHistoryByUserId(int userId);
+
+    EmploymentHistory getById(int id);
+
+    public List<EmploymentHistory> getAll();
     
     boolean updateEmploymentHistory(EmploymentHistory eh);
     

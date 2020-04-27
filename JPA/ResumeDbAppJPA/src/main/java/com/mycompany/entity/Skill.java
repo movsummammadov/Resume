@@ -23,7 +23,7 @@ import javax.persistence.Table;
 
 /**
  *
- * @author movsu
+ * @author Movsum Mammadov
  */
 @Entity
 @Table(name = "skill")
@@ -44,7 +44,7 @@ public class Skill implements Serializable {
     @Column(name = "name")
     private String name;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "skill")
-    private List<UserSkill> userSkil1lList;
+    private List<UserSkill> userSkillList;
 
     public Skill() {
     }
@@ -75,12 +75,12 @@ public class Skill implements Serializable {
     }
 
 //    @XmlTransient
-    public List<UserSkill> getUserSkil1lList() {
-        return userSkil1lList;
+    public List<UserSkill> getUserSkillList() {
+        return userSkillList;
     }
 
-    public void setUserSkil1lList(List<UserSkill> userSkil1lList) {
-        this.userSkil1lList = userSkil1lList;
+    public void setUserSkillList(List<UserSkill> userSkillList) {
+        this.userSkillList = userSkillList;
     }
 
     @Override
@@ -105,7 +105,7 @@ public class Skill implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mycompany.entity.Skill[ id=" + id + " ]";
+        return "com.mycompany.entity.Skill[ id=" + id + " name="+name+" ]";
     }
     
 }

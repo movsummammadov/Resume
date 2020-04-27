@@ -24,8 +24,9 @@ public class UserDaoImpl extends AbstractDao implements UserDaoInter {
     public List<User> getAllUser() {
         EntityManager em = em();
         Query q = em.createQuery("select u from User u");
-        return q.getResultList();
-
+        List<User> list=q.getResultList();
+        em.close();
+        return list;
     }
 
     @Override
@@ -52,7 +53,9 @@ public class UserDaoImpl extends AbstractDao implements UserDaoInter {
         if (nationalityId != null) {
             q.setParameter("nid", nationalityId);
         }
-        return q.getResultList();
+        List<User> list=q.getResultList();
+        em.close();
+        return list;
     }
 
     @Override
@@ -65,6 +68,7 @@ public class UserDaoImpl extends AbstractDao implements UserDaoInter {
         if (list.size() == 1) {
             return list.get(0);
         }
+        em.close();
         return null;
     }
     
@@ -81,6 +85,7 @@ public class UserDaoImpl extends AbstractDao implements UserDaoInter {
 //        if (list.size() == 1) {
 //            return list.get(0);
 //        }
+//        em.close();
 //        return null;
 //    }
 
@@ -94,6 +99,7 @@ public class UserDaoImpl extends AbstractDao implements UserDaoInter {
         if (list.size() == 1) {
             return list.get(0);
         }
+        em.close();
         return null;
     }
     
@@ -107,6 +113,7 @@ public class UserDaoImpl extends AbstractDao implements UserDaoInter {
 //        if (list.size() == 1) {
 //            return list.get(0);
 //        }
+//        em.close();
 //        return null;
 //    }
     
@@ -120,6 +127,7 @@ public class UserDaoImpl extends AbstractDao implements UserDaoInter {
 //        if (list.size() == 1) {
 //            return list.get(0);
 //        }
+//        em.close();
 //        return null;
 //    }
     
@@ -136,6 +144,7 @@ public class UserDaoImpl extends AbstractDao implements UserDaoInter {
 //        if (list.size() == 1) {
 //            return list.get(0);
 //        }
+//        em.close();
 //        return null;
 //    }
     
@@ -162,7 +171,6 @@ public class UserDaoImpl extends AbstractDao implements UserDaoInter {
 
     @Override
     public boolean updateUser(User u) {
-//        u.setPassword(crypt.hashToString(4, u.getPassword().toCharArray()));
         EntityManager em = em();
         em.getTransaction().begin();
         em.merge(u);
