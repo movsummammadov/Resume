@@ -1,8 +1,9 @@
 package com.mycompany.dao.impl;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
-import com.mycompany.dao.inter.UserDaoInter;
 import com.mycompany.entity.User;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -16,11 +17,12 @@ import java.util.List;
  *
  */
 @Repository("userDao1")
-public class UserDaoImpl implements UserDaoInter {
+public class UserRepositoryCustomImpl implements UserRepositoryCustom {
 
     @PersistenceContext
     EntityManager em;
 
+    @Cacheable(value = "users")
     @Override
     public List<User> getAllUser() {
         Query q = em.createQuery("select u from User u");
@@ -29,6 +31,7 @@ public class UserDaoImpl implements UserDaoInter {
     }
 
     @Override
+    @Cacheable(value = "users")
     public List<User> getAllUser(String name, String surname, Integer nationalityId) {
         String jpql = "select u from User u where 1=1";
         if (name != null && !name.trim().isEmpty()) {
@@ -139,6 +142,7 @@ public class UserDaoImpl implements UserDaoInter {
     }
 
     @Override
+    @CacheEvict(value = "users", allEntries=true)
     public boolean removeUser(int userId) {
         User user = em.find(User.class, userId);
         em.remove(user);

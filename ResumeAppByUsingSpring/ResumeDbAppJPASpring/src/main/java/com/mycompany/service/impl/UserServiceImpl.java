@@ -1,7 +1,7 @@
 package com.mycompany.service.impl;
 
 
-import com.mycompany.dao.inter.UserDaoInter;
+import com.mycompany.dao.impl.UserRepositoryCustom;
 import com.mycompany.entity.User;
 import com.mycompany.service.inter.UserServiceInter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserServiceInter {
 
     @Autowired
     @Qualifier("userDao1")
-    private UserDaoInter userDao;
+    private UserRepositoryCustom userDao;
 
     @Override
     public List<User> getAllUser() {
