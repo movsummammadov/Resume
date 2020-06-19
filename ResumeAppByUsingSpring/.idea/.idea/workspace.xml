@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="e4dbd11e-31f6-4157-8cd8-92e864df8fd6" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../resumerestapi/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../resumerestapi/.mvn/wrapper/MavenWrapperDownloader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../resumerestapi/.mvn/wrapper/maven-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../resumerestapi/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../resumerestapi/mvnw" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../resumerestapi/mvnw.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../resumerestapi/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../resumerestapi/src/main/java/com/mycompany/ResumerestapiApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../resumerestapi/src/main/java/com/mycompany/ServletInitializer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../resumerestapi/src/main/java/com/mycompany/controller/UserRestController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../resumerestapi/src/main/java/com/mycompany/dto/ResponseDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../resumerestapi/src/main/java/com/mycompany/dto/SkillDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../resumerestapi/src/main/java/com/mycompany/dto/UserDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../resumerestapi/src/main/java/com/mycompany/dto/UserSkillDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../resumerestapi/src/main/resources/application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../resumerestapi/src/test/java/com/mycompany/ResumerestapiApplicationTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../resumerestclient/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../resumerestclient/src/main/webapp/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ResumeDbAppJPASpring/src/main/java/com/mycompany/dao/impl/UserRepositoryCustomImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ResumeDbAppJPASpring/src/main/java/com/mycompany/dao/impl/UserRepositoryCustomImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ResumeWebAppSpring/src/main/webapp/WEB-INF/assets/css/login3.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ResumeWebAppSpring/src/main/webapp/WEB-INF/login.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/../ResumeWebAppSpring/src/main/webapp/WEB-INF/login.jsp" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectId" id="1dUvUXhwfhwaeiqdEj1LLmvRSMa" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e4dbd11e-31f6-4157-8cd8-92e864df8fd6" name="Default Changelist" comment="" />
+      <created>1592492502836</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1592492502836</updated>
+      <workItem from="1592492505120" duration="25000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+</project>

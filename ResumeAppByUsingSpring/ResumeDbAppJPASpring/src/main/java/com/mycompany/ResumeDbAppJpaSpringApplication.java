@@ -1,6 +1,7 @@
 package com.mycompany;
 
 import com.mycompany.dao.impl.UserRepository;
+import com.mycompany.entity.User;
 import com.mycompany.service.inter.UserServiceInter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -24,28 +25,34 @@ public class ResumeDbAppJpaSpringApplication {
 //	@Autowired
 //	private UserRepository userRepository;
 //
-//	@Autowired
-//	private UserServiceInter userService;
+	@Autowired
+	private UserServiceInter userService;
 //
-//	@Bean
-//	public CommandLineRunner run(){
-//		CommandLineRunner clr=new CommandLineRunner() {
-//			@Override
-//			public void run(String... args) throws Exception {
+	@Bean
+	public CommandLineRunner run(){
+		CommandLineRunner clr=new CommandLineRunner() {
+			@Override
+			public void run(String... args) throws Exception {
+				User user=new User();
+				user.setName("Fidayl");
+				user.setSurname("Valiyev");
+				user.setPassword("12345");
+				userService.addUser(user);
+				System.out.println(userService.getAllUser());
 //				for (int i = 0; i < 10; i++) {
 //					userService.getAllUser();
 //				}
-////				User u=userRepository.findById(3).get();
-////				System.out.println(userRepository.findByEmail("movsum617@gmail.com"));
-////				System.out.println(userRepository.findByName("Movsum"));
-////				List<User> list=userRepository.findAll();
-////				System.out.println(list);
-////				list=userRepository.findAll(Sort.by(Sort.Order.desc("name")));
-////				System.out.println(list);
-//			}
-//		};
-//		return clr;
-//	}
+//				User u=userRepository.findById(3).get();
+//				System.out.println(userRepository.findByEmail("movsum617@gmail.com"));
+//				System.out.println(userRepository.findByName("Movsum"));
+//				List<User> list=userRepository.findAll();
+//				System.out.println(list);
+//				list=userRepository.findAll(Sort.by(Sort.Order.desc("name")));
+//				System.out.println(list);
+			}
+		};
+		return clr;
+	}
 
 //	@Bean
 //	public CommandLineRunner run(){

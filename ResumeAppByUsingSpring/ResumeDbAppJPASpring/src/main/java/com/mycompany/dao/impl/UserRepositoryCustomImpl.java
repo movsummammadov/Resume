@@ -22,7 +22,7 @@ public class UserRepositoryCustomImpl implements UserRepositoryCustom {
     @PersistenceContext
     EntityManager em;
 
-    @Cacheable(value = "users")
+//    @Cacheable(value = "users")
     @Override
     public List<User> getAllUser() {
         Query q = em.createQuery("select u from User u");
@@ -31,7 +31,7 @@ public class UserRepositoryCustomImpl implements UserRepositoryCustom {
     }
 
     @Override
-    @Cacheable(value = "users")
+//    @Cacheable(value = "users")
     public List<User> getAllUser(String name, String surname, Integer nationalityId) {
         String jpql = "select u from User u where 1=1";
         if (name != null && !name.trim().isEmpty()) {

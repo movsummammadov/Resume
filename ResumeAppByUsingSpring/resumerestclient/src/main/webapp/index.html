@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Resume Rest Client</title>
+
+    <script>
+        function printUser(arr) {
+            let container=document.getElementById("container");
+            container.innerHTML='';
+            for (let i = 0; i <arr.length; i++) {
+                let obj = arr[i];
+                let deleteBtn='<button onclick="deleteUser('+obj.id+')">Delete</button>'
+                let str = obj.id + " " + obj.name + " " + obj.surname + " " + deleteBtn + "<br/>";
+                container.innerHTML += str;
+            }
+        }
+
+        function deleteUser(id){
+            let xhttp=new XMLHttpRequest();
+            xhttp.onreadystatechange=function () {
+                if(this.readyState==4 && this.status==200){
+                    getUsers();
+                }
+            };
+            xhttp.open("DELETE","http://localhost:8085/resumerest/users/"+id,true);
+            xhttp.send();
+        }
+
+        function getUsers(){
+            let xhttp=new XMLHttpRequest();
+            xhttp.onreadystatechange=function () {
+                if(this.readyState==4 && this.status==200){
+                    let response=JSON.parse(this.responseText);
+                    let list=response.obj;
+                    printUser(list);
+                }
+            };
+            xhttp.open("GET","http://localhost:8085/resumerest/users",true);
+            xhttp.send();
+        }
+
+        function addUser(){
+            let xhttp=new XMLHttpRequest();
+            xhttp.onreadystatechange=function () {
+                if(this.readyState==4 && this.status==200){
+                    getUsers();
+                }
+            };
+            let name=document.getElementById("name").value;
+            let surname=document.getElementById("surname").value;
+            let password=document.getElementById("password").value;
+
+            let user={name: name, surname: surname, password: password};
+
+            xhttp.open("POST","http://localhost:8085/resumerest/users",true);
+            xhttp.setRequestHeader("Content-Type","application/json");
+            xhttp.send(JSON.stringify(user));
+        }
+    </script>
+</head>
+<body onload="getUsers()">
+<div>
+    <input type="text" id="name" placeholder="Enter your name"/>
+    <input type="text" id="surname" placeholder="Enter your surname"/>
+    <input type="password" id="password" placeholder="Enter your password"/>
+    <button onclick="addUser()">Add</button>
+</div>
+<div id="container">
+</div>
+</body>
+</html>

@@ -47,10 +47,10 @@ public class User implements Serializable {
     @Basic(optional = false)
     @Column(name = "surname")
     private String surname;
-    @Basic(optional = false)
+    @Basic(optional = true)
     @Column(name = "email")
     private String email;
-    @Basic(optional = false)
+    @Basic(optional = true)
     @Column(name = "phone")
     private String phone;
     @Column(name = "address")
@@ -61,7 +61,7 @@ public class User implements Serializable {
     @Column(name = "birthdate")
     @Temporal(TemporalType.DATE)
     private Date birthdate;
-    @Basic(optional = false)
+    @Basic(optional = true)
     @Column(name = "password")
     private String password;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
