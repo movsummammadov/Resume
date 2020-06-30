@@ -4,6 +4,7 @@ import at.favre.lib.crypto.bcrypt.BCrypt;
 import com.mycompany.entity.User;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -149,7 +150,9 @@ public class UserRepositoryCustomImpl implements UserRepositoryCustom {
         return true;
     }
 
-    private BCrypt.Hasher crypt = BCrypt.withDefaults();
+//    private BCrypt.Hasher crypt = BCrypt.withDefaults();
+
+    private static BCryptPasswordEncoder crypt=new BCryptPasswordEncoder();
 
     @Override
     public boolean updateUser(User u) {
@@ -159,7 +162,7 @@ public class UserRepositoryCustomImpl implements UserRepositoryCustom {
 
     @Override
     public boolean addUser(User u) {
-        u.setPassword(crypt.hashToString(4, u.getPassword().toCharArray()));
+        u.setPassword(crypt.encode(u.getPassword()));
         em.persist(u);
         return true;
     }
