@@ -1,12 +1,10 @@
 package com.mycompany.controller;
 
-import com.mycompany.dao.impl.UserRepositoryCustom;
 import com.mycompany.dto.ResponseDTO;
 import com.mycompany.entity.User;
 import com.mycompany.dto.UserDTO;
 import com.mycompany.service.inter.UserServiceInter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

@@ -7,7 +7,6 @@ public class ResponseDTO {
     private Object obj;
 
     private ResponseDTO(){
-
     }
 
     public static ResponseDTO of(Object obj){
